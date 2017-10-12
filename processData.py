@@ -3,14 +3,20 @@
 #import jieba.posseg as peg #带词性
 import jieba
 
-data = '木质后盖蛮喜欢的'
-path = r'file/resource/stopwords.txt'     #停用词表
-file_path = r'file/resource/test1.txt'    #原始数据
-seg_path = r'file/resource/seg_file.txt'  #分词结果
-res_path = r'file/resource/res.txt'       #相似度
-distinct_path = r'file/resource/distinct.txt'       #最终结果
+# data = '木质后盖蛮喜欢的'
+path = r'file/tmp/stopwords.txt'     #停用词表
+# file_path = r'file/tmp/test1.txt'    #原始数据
+# seg_path = r'file/tmp/seg_file.txt'  #分词结果
+# res_path = r'file/tmp/res.txt'       #相似度
+# distinct_path = r'file/tmp/distinct.txt'       #最终结果
+
+file_path = r'file/resource/huaweimaimang.txt'    #原始数据
+seg_path = r'file/seg/seg_huaweimaimang.txt'  #分词结果
+res_path = r'file/sim/sim_huaweimaimang.txt'       #相似度
+distinct_path = r'file/res/distinct_huaweimaimang.txt'       #最终结果
+
 #seg = peg.cut(data)   #精确模式
-seg = jieba.cut(data)
+# seg = jieba.cut(data)
 
 #获取文件内容
 def getFileContent(filePath):
@@ -63,11 +69,7 @@ def model():
     tfidf = models.TfidfModel(corpus)
     corpus_tfidf = tfidf[corpus]
     #把评论做成索引
-    # query = '打电话 时有 回音 ， 买 父亲 、 十天 ， 、 '
-    # vec_bow = dictionary.doc2bow(query.split())
-    # vec_tfidf = tfidf[vec_bow]
-    # for item in corpus_tfidf:
-    #     print(item)
+
     index = similarities.MatrixSimilarity(corpus_tfidf)
     content = getFileContent(file_path)
     seg_content = getFileContent(seg_path)
@@ -95,10 +97,5 @@ def model():
     for item in res_tmp:
         distinct_file.write(item + "\n")
     distinct_file.close()
-    # sims = index[vec_tfidf]
-    # similarity = list(sims)
-    # sim_file = open(res_path, 'w')
-    # for i in similarity:
-    #     sim_file.write(str(i) + "\n")
-    # sim_file.close()
+process()
 model()
