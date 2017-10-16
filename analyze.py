@@ -106,14 +106,7 @@ def caculate(reals, predicts):
     print("召回率:", correct_info/sample_info)
 
 
-
-
 if __name__ == "__main__":
     reals, predicts = read_data(path)
     test(reals, predicts)
     caculate(reals, predicts)
-
-# if __name__ == "__main__":
-#     reals = ['OOOOBIBIIOBI']
-#     predicts = ['OOOOOOOOOOBI']
-#     caculate(reals, predicts)
