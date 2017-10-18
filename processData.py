@@ -10,10 +10,10 @@ path = r'file/tmp/stopwords.txt'     #停用词表
 # res_path = r'file/tmp/res.txt'       #相似度
 # distinct_path = r'file/tmp/distinct.txt'       #最终结果
 
-file_path = r'file/resource/huaweimaimang.txt'    #原始数据
-seg_path = r'file/seg/seg_huaweimaimang.txt'  #分词结果
-res_path = r'file/sim/sim_huaweimaimang.txt'       #相似度
-distinct_path = r'file/res/distinct_huaweimaimang.txt'       #最终结果
+file_path = r'file/resource/other.txt'    #原始数据
+seg_path = r'file/seg/seg_other.txt'  #分词结果
+res_path = r'file/sim/sim_other.txt'       #相似度
+distinct_path = r'file/res/distinct_other.txt'       #最终结果
 
 #seg = peg.cut(data)   #精确模式
 # seg = jieba.cut(data)
@@ -43,7 +43,7 @@ def process():
     #分词并去除停用词
     for line in fileContent:
         line = line.strip()
-        if line == '':
+        if line == '' or line.__len__() < 3:
             continue
         tmp = jieba.cut(line)
         res += seg_sentence(tmp, stopWords)
