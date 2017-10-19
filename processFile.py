@@ -1,9 +1,9 @@
 
 
-file_path = r'file/crf/resource/test.txt'
-res_path = r'file/crf/result/res_test.data'
+file_path = r'file/crf/resource/final_data.txt'
+res_path = r'file/crf/result/res_final.data'
 dic_path = r'file/crf/dic/dictionary.txt'
-predict_path = r'file/crf/predict/res_output.txt'
+predict_path = r'file/crf/predict/res_output_final.txt'
 
 #获取文件内容
 def getFileContent(filePath):
@@ -31,6 +31,8 @@ def extract():
         if ch == '':
             continue
         tmp = ch.split()
+        if tmp.__len__() < 2:
+            continue
         if tmp[1] == 'I':
             word = word + tmp[0]
         elif tmp[1] == 'B':
@@ -43,8 +45,10 @@ def extract():
                 res.add(word)
                 word = ''
     dic_file = open(dic_path, 'w', encoding='utf-8')
+    str = ''
     for item in res:
-        dic_file.write(item + '\n')
+        str =str + item + '\n'
+    dic_file.write(str)
     dic_file.close()
 
 #将文本变为crf格式
